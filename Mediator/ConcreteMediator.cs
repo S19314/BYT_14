@@ -46,6 +46,7 @@ namespace BYT_zad_ind_14.Mediator
             if (ev == "SendBurgerToClient") 
             {
                 Console.WriteLine("Waiter say: Proszę," + ((Product)product).GetName() + "dla Pana/Pani.");
+                this.userClient.ToThankYou((Product)product);
             }
         }
     }

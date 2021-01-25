@@ -6,10 +6,10 @@ namespace BYT_zad_ind_14.Builder
 {
     public class Product
     {
-        private readonly string name;
+        private string name;
         private readonly List<string> parts = new List<string>();
 
-        public Product(string name)
+        public Product(string name = "")
         {
             this.name = name;
         }
@@ -18,9 +18,9 @@ namespace BYT_zad_ind_14.Builder
         {
             return name;
         }
-        public void SetName() 
+        public void SetName(string name) 
         {
-            return name;
+            this.name = name;
         }
 
         public void Add(string part)
