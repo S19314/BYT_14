@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using BYT_zad_ind_14.Builder;
-
+using BYT_zad_ind_14.Builder.Interface;
 namespace BYT_zad_ind_14.Builder
 {
-    public class ConcreteBuilder
+    public class ConcreteBuilder : IBuilder
     {
         private Product _product = new Product();
 

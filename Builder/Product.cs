@@ -39,7 +39,7 @@ namespace BYT_zad_ind_14.Builder
         {
             string reviewProduct = "\nProduct " + name + " Parts -------";
             foreach (string part in parts) reviewProduct += "\n" + part;
-            return reviewProduct;
+            return reviewProduct + "\n";
         }
     }
 }

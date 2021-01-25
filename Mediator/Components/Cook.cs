@@ -58,25 +58,32 @@ namespace BYT_zad_ind_14.Mediator.Components
         // DOWN Mediator Part
         public void CookBurger(Product product)
         {
-            Console.WriteLine("Cook\'s answer: Np, teraz zrobię dla tobię burgera");
+            Console.WriteLine("Cook\'s answer: Np, teraz zrobię dla tobię " + product.GetName());
+            
             switch (product.GetName()) 
             {
                 case "Burger":
                     this.BuildBurger();
+                    product = ((ConcreteBuilder)_builder).GetProduct(); /* tutaj potrzebno określić
+                                                                        * z jakego konkrtnego buildera korzystamy
+                                                                        * dla korzystania z funkcji GetProduct()
+                                                                        * 
+                                                                        */
+                    product.SetName("Burger");
                     break;
                 case "BigMac":
                     this.BuildBigMac();
+                    product = ((ConcreteBuilder)_builder).GetProduct();
+                    product.SetName("BigMac");
                     break;
                 case "CheeseBurger":
                     this.BuildCheeseBurger();
+                    product = ((ConcreteBuilder)_builder).GetProduct();
+                    product.SetName("CheeseBurger");
                     break;
             }
 
-            this._mediator.Notify(this, "GiveBurgerToWaiter", ((ConcreteBuilder)_builder).GetProduct()); /* tutaj potrzebno określić
-                                                                                                          * z jakego konkrtnego buildera korzystamy
-                                                                                                          * dla korzystania z funkcji GetProduct()
-                                                                                                          * 
-                                                                                                          */
+            this._mediator.Notify(this, "CookBurger", product);
         }
     }
 }

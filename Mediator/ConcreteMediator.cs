@@ -29,23 +29,23 @@ namespace BYT_zad_ind_14.Mediator
         {
             if (ev == "AskWaiterForBurger")
             {
-                Console.WriteLine("Mediator reacts on A and triggers folowing operations:");
-                this.waiter.ConfirmBurgerOdrer();
+                Console.WriteLine("User say to Waiter: Zamawiam " + ((Product)product).GetName() + ".");
+                this.waiter.ConfirmBurgerOdrer((Product)product);
             }
             if (ev == "ConfirmBurgerOdrer")
             {
-                Console.WriteLine("Waiter asked Cook: Proszę, przygotuj Burger.");
-                this.cook.CookBurger();
+                Console.WriteLine("Waiter asked Cook: Proszę, przygotuj " + ((Product)product).GetName() + ".");
+                this.cook.CookBurger((Product)product);
                 
             }
             if(ev == "CookBurger")  // GiveBurgerToWaiter
             {
-                Console.WriteLine("Cook say: Trymaj Burgera!");
-                this.waiter.SendBurgerToClient((Product)product); // Можно отправаить как абстрактную булку, а посел через ToString() узнать что это за блюдо.
+                Console.WriteLine("Cook say: Trymaj " + ((Product)product).GetName() + ".");
+                this.waiter.SendBurgerToClient((Product)product);
             }
             if (ev == "SendBurgerToClient") 
             {
-                Console.WriteLine("Waiter say: Proszę," + ((Product)product).GetName() + "dla Pana/Pani.");
+                Console.WriteLine("Waiter say: Proszę, " + ((Product)product).GetName() + "dla Pana/Pani.");
                 this.userClient.ToThankYou((Product)product);
             }
         }

@@ -10,23 +10,10 @@ namespace BYT_zad_ind_14
     class Program
     {
         static void Main(string[] args)
-        { 
-            /*
-             *     
-            Foo foo = new Foo("Test", 15);
-            foo.Print();
-            Caretaker ct1 = new Caretaker();
-            Caretaker ct2 = new Caretaker();
-            ct1.SaveState(foo);
-            foo.IntProperty += 152;
-            foo.Print();
-            ct2.SaveState(foo);
-            ct1.RestoreState(foo);
-            foo.Print();
-            ct2.RestoreState(foo);
-            foo.Print();
-            Console.ReadKey();
-            */
+        {
+            Console.WriteLine("Good day! Witamy w SuperBurgerze!");
+            communcationWithClient();
+            Console.WriteLine("Program skończył swoje działanie.");
             Console.ReadKey();
         }
 
@@ -38,11 +25,10 @@ namespace BYT_zad_ind_14
             ConcreteMediator concreteMediator = new ConcreteMediator(waiter, cook, user);
             var builder = new ConcreteBuilder();
             cook.Builder = builder;
+
             Caretaker caretaker = new Caretaker();
             PasswordManager passwordManager = new PasswordManager(user, caretaker);
-            Console.WriteLine("Good day! Witamy w SuperBurgerze!");
-            communcationWithClient();
-            Console.WriteLine("Program skończył swoje działanie.");
+
 
             Console.WriteLine(" Dla korzystania z systemu, proszę zalogować się" +
                     "\nP.S. Password dla testera: root");

@@ -55,8 +55,6 @@ namespace BYT_zad_ind_14.Memento
         // DOWN for Pattern Mediator
         public void AskWaiterForBurger(Product orderedProduct) // różne nazwy burgerów, potem, potrzebno sprawdzić całą drogę 
         {
-            Console.WriteLine("User say to Waiter: Zamawiam burger.");
-
             this._mediator.Notify(this, "AskWaiterForBurger", orderedProduct);
         }
 
