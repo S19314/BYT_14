@@ -4,6 +4,7 @@ using System.Text;
 using BYT_zad_ind_14.Mediator;
 using BYT_zad_ind_14.Builder;
 using BYT_zad_ind_14.Builder.Interface;
+
 namespace BYT_zad_ind_14.Mediator.Components
 {
     public class Cook : BaseComponent
@@ -19,6 +20,7 @@ namespace BYT_zad_ind_14.Mediator.Components
              * I również trochę zmieniłem oryginałną funkcje Notify() w interfejsie Mediatora, dla  zmniejszenia ilości metod, które będą wykonali 
              * podobne działania, ale dla różnych typów potraw.
              */
+
         }
 
         
@@ -54,16 +56,31 @@ namespace BYT_zad_ind_14.Mediator.Components
         }   
 
         // DOWN Mediator Part
-        public void CookBurger()
+        public void CookBurger(Product product)
         {
             Console.WriteLine("Cook\'s answer: Np, teraz zrobię dla tobię burgera");
             /*
              Make Burger by Pattern Builder, возможно, отправка бургера клиенту через waitera
              */
-            Object product = Builder;
-            this._mediator.Notify(this, "GiveBurgerToWaiter", product);
-        }
+            
+            switch (product.GetName()) 
+            {
+                case "Burger":
+                    this.BuildBurger();
+                    break;
+                case "BigMac":
+                    this.BuildBigMac();
+                    break;
+                case "CheeseBurger":
+                    this.BuildCheeseBurger();
+                    break;
+            }
 
-     
+            this._mediator.Notify(this, "GiveBurgerToWaiter", ((ConcreteBuilder)_builder).GetProduct()); /* tutaj potrzebno określić
+                                                                                                          * z jakego konkrtnego buildera korzystamy
+                                                                                                          * dla korzystania z funkcji GetProduct()
+                                                                                                          * 
+                                                                                                          */
+        }
     }
 }
