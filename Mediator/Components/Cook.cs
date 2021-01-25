@@ -59,10 +59,6 @@ namespace BYT_zad_ind_14.Mediator.Components
         public void CookBurger(Product product)
         {
             Console.WriteLine("Cook\'s answer: Np, teraz zrobię dla tobię burgera");
-            /*
-             Make Burger by Pattern Builder, возможно, отправка бургера клиенту через waitera
-             */
-            
             switch (product.GetName()) 
             {
                 case "Burger":

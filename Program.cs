@@ -1,24 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using BYT_zad_ind_14.Memento;
+using BYT_zad_ind_14.Builder;
+using BYT_zad_ind_14.Mediator.Components;
+using BYT_zad_ind_14.Mediator;
+
 namespace BYT_zad_ind_14
 {
     class Program
     {
-
-        private static PasswordManager passwordManager;
         static void Main(string[] args)
-        {
-
-            User user = new User("root");
-            Caretaker caretaker = new Caretaker();
-            passwordManager = new PasswordManager(user, caretaker);
-            Console.WriteLine("Good day! Witamy w SuperBurgerze!");
-            communcationWithClient();
-            Console.WriteLine("Program skończył swoje działanie.");
+        { 
             /*
-             * 
-             
+             *     
             Foo foo = new Foo("Test", 15);
             foo.Print();
             Caretaker ct1 = new Caretaker();
@@ -37,8 +31,20 @@ namespace BYT_zad_ind_14
         }
 
         private static void communcationWithClient()
-        {   
-                Console.WriteLine(" Dla korzystania z systemu, proszę zalogować się" +
+        {
+            User user = new User("root");
+            Waiter waiter = new Waiter();
+            Cook cook = new Cook();
+            ConcreteMediator concreteMediator = new ConcreteMediator(waiter, cook, user);
+            var builder = new ConcreteBuilder();
+            cook.Builder = builder;
+            Caretaker caretaker = new Caretaker();
+            PasswordManager passwordManager = new PasswordManager(user, caretaker);
+            Console.WriteLine("Good day! Witamy w SuperBurgerze!");
+            communcationWithClient();
+            Console.WriteLine("Program skończył swoje działanie.");
+
+            Console.WriteLine(" Dla korzystania z systemu, proszę zalogować się" +
                     "\nP.S. Password dla testera: root");
             if (!passwordManager.autorizateUser()) return;
              
@@ -56,7 +62,7 @@ namespace BYT_zad_ind_14
                     case "1":
                         // password
                         passwordManager.SaveState();
-                        Console.WriteLine("Proszę, wpisać nowe hasło" +
+                        Console.WriteLine("Proszę, wpisać nowe hasło, nowe hasło będzie działać tylko podczas działania sesji" +
                             "\n Hasło nie może mieć wartość: STOP" +
                             "\n Proszę wpisać STOP, jeżeli rezegnujeś z edycji hasła.");
 
@@ -75,7 +81,30 @@ namespace BYT_zad_ind_14
                         passwordManager.PrintUserData();   
                         break;
                     case "2":
-                        // burger
+                        Console.WriteLine("\tMenu" +
+                            "\n==============================================" +
+                            "\nDla wyboru Burgera proszę wpisać 1 ;" +
+                            "\nDla wyboru CheeseBurgera proszę wpisać 2 ; " +
+                            "\nDla wyboru BigMac proszę wpisać 3 ;" +
+                            "\nDla rezygnacji proszę wpisać 4 ;");
+                        string menuCommand = Console.ReadLine();
+                        switch (menuCommand) 
+                        {
+                            case "1":
+                                user.AskWaiterForBurger(new Product("Burger"));
+                                break;
+                            case "2":
+                                user.AskWaiterForBurger(new Product("CheeseBurger"));
+                                break;
+                            case "3":
+                                user.AskWaiterForBurger(new Product("BigMac"));
+                                break;
+                            case "4":
+                                Console.WriteLine("Nie sostało wybrano potrawy.");
+                                break;
+                            default:
+                                break;
+                        }
                         break;
                     default:
                         break;
@@ -83,118 +112,5 @@ namespace BYT_zad_ind_14
             } while (!commandSystem.Equals("END"));
 
         }
-
-
-        
-    }
-
-}
-
-    /*
-        // Create director and builders
-        Director director = new Director();
-
-        Builder b1 = new ConcreteBuilder1();
-        Builder b2 = new ConcreteBuilder2();
-
-        // Construct two products
-        director.Construct(b1);
-        Product p1 = b1.GetResult();
-        p1.Show();
-
-        director.Construct(b2);
-        Product p2 = b2.GetResult();
-        p2.Show();
-
-        // Wait for user
-        Console.Read();
     }
 }
-
-// "Director"
-
-class Director
-{
-    // Builder uses a complex series of steps
-    public void Construct(Builder builder)
-    {
-        builder.BuildPartA();
-        builder.BuildPartB();
-    }
-}
-
-// "Builder"
-
-abstract class Builder
-{
-    public virtual void BuildPartA() { }
-    public virtual void BuildPartB() { }
-    public abstract Product GetResult();
-}
-
-// "ConcreteBuilder1"
-
-class ConcreteBuilder1 : Builder
-{
-    private readonly Product product = new Product();
-
-    public override void BuildPartA()
-    {
-        product.Add("PartA");
-    }
-
-    public override void BuildPartB()
-    {
-        product.Add("PartB");
-    }
-
-    public override Product GetResult()
-    {
-        return product;
-    }
-}
-
-// "ConcreteBuilder2"
-
-class ConcreteBuilder2 : Builder
-{
-    private readonly Product product = new Product();
-
-    public override void BuildPartA()
-    {
-        product.Add("PartX");
-    }
-
-    public override void BuildPartB()
-    {
-        product.Add("PartY");
-    }
-
-    public override Product GetResult()
-    {
-        return product;
-    }
-}
-
-// "Product"
-
-class Product
-{
-    private readonly List<string> parts = new List<string>();
-
-    public void Add(string part)
-    {
-        parts.Add(part);
-    }
-
-    public void Show()
-    {
-        Console.WriteLine("\nProduct Parts -------");
-        foreach (string part in parts)
-            Console.WriteLine(part);
-    }
-}
-
-    } 
-
-    */
