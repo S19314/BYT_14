@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using BYT_zad_ind_14.Memento.Interface;
 using BYT_zad_ind_14.Mediator;
+using BYT_zad_ind_14.Builder;
+
 namespace BYT_zad_ind_14.Memento
 {
     public class User : BaseComponent, IOriginator
@@ -62,11 +64,11 @@ namespace BYT_zad_ind_14.Memento
         /// <summary>
         ///  THANK you?
         /// </summary>
-        public void DoB()
+        public void ToThankYou(Product product)
         {
-            Console.WriteLine("Component 1 does B.");
+            Console.WriteLine("User say: Thank you for the " + product.ToString());
 
-            // this._mediator.Notify(this, "B");
+            this._mediator.Notify(this, "ToThankYou", product);
         }
     }
 
