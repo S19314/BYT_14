@@ -42,7 +42,7 @@ namespace BYT_zad_ind_14
                     "\nP.S. Password dla testera: root");
             if (!passwordManager.autorizateUser()) return;
              
-            string commandSystem = "";
+            string commandSystem = "";  
             do
             {
                 Console.WriteLine("Jesteś autoryzowany.\n" +
@@ -64,6 +64,7 @@ namespace BYT_zad_ind_14
                         try
                         {
                             passwordManager.ChangePassword(newPassword);
+                            Console.WriteLine("Hasło zostało zmienione");
                         }
                         catch (ArgumentException arge) 
                         {
@@ -71,7 +72,7 @@ namespace BYT_zad_ind_14
                             Console.WriteLine("Została wykonana rezygnacja ze zmiany hasła");
                             passwordManager.RestoreState();
                         }
-
+                        passwordManager.PrintUserData();   
                         break;
                     case "2":
                         // burger

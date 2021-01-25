@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 using BYT_zad_ind_14.Memento.Interface;
-
+using BYT_zad_ind_14.Mediator;
 namespace BYT_zad_ind_14.Memento
 {
-    class User : IOriginator
+    public class User : BaseComponent, IOriginator
     {
+
         public string PasswordStringProperty
         {
             get;
             set;
-            
         }
 
         public DateTime LastDateUpdateProperty
@@ -47,6 +47,28 @@ namespace BYT_zad_ind_14.Memento
             PasswordStringProperty = ((Memento)memento).PasswordStringProperty;
             LastDateUpdateProperty = ((Memento)memento).LastDateUpdateProperty;
         }
+
+
+
+        // DOWN for Pattern Mediator
+        public void AskWaiterForBurger()
+        {
+            Console.WriteLine("User say to Waiter: Zamawiam burger.");
+
+            this._mediator.Notify(this, "AskWaiterForBurger", null);
+        }
+
+
+        /// <summary>
+        ///  THANK you?
+        /// </summary>
+        public void DoB()
+        {
+            Console.WriteLine("Component 1 does B.");
+
+            // this._mediator.Notify(this, "B");
+        }
     }
+
 }
 

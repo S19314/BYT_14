@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BYT_zad_ind_14.Memento
 {
-    class PasswordManager
+    public class PasswordManager
     {
         private User user;
         private Caretaker caretaker;
@@ -36,14 +36,17 @@ namespace BYT_zad_ind_14.Memento
             return user.PasswordStringProperty.Equals(password);
         }
 
-
+        public void PrintUserData() 
+        {
+            user.Print();
+        }
         public bool autorizateUser()
         {
             string password;
             do
             {
                 Console.WriteLine("Proszę wpisać swoje hasło\n" +
-                    "Dla rezegnacji z zmiany hasła, proszę wpisać: STOP");
+                    "Dla rezegnacji z wpisywania hasła, proszę wpisać: STOP");
                 password = Console.ReadLine().Trim();
                 if (password.Equals("STOP")) return false;
             } while (!isPasswordsEquals(password));
