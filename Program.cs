@@ -71,6 +71,7 @@ namespace BYT_zad_ind_14
                             Console.WriteLine("Została wykonana rezygnacja ze zmiany hasła");
                             passwordManager.RestoreState();
                         }
+
                         break;
                     case "2":
                         // burger
@@ -78,7 +79,7 @@ namespace BYT_zad_ind_14
                     default:
                         break;
                 }
-            } while (commandSystem.Equals("END"));
+            } while (!commandSystem.Equals("END"));
 
         }
 
